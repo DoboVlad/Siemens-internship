@@ -1,0 +1,196 @@
+<div class="main-container">
+  <form [formGroup]="orderForm" class="form__information" (ngSubmit)="onSubmit()">
+      <h2 class="title">Delivery and invoicing</h2>
+      <div class="form__information--data">
+        <div class="form__information--combo-email">
+          <label for="" class="form__information--email" >Email</label>
+          <input type="text" placeholder="Email" formControlName="email" class="form-control form__information--field form__information--input--email">
+          <div
+              class="invalid"
+              *ngIf="
+              this.orderForm.controls.email.touched &&
+              this.orderForm.controls.email.value === ''
+              ">
+               Required.
+            </div>
+            <div
+              class="invalid"
+              *ngIf="
+              this.orderForm.controls.email.touched &&
+              this.orderForm.controls.email.invalid
+              ">
+                Enter a valid email.
+            </div>
+        </div>
+      </div>
+      <div class="form__information--address">
+        <div class="form__information--combo">
+          <label for="" class="form__information--first-name">First name</label>
+          <input type="text" placeholder="First name" formControlName="firstName" class="form-control form__information--field form__information--input--first-name">
+          <div
+              class="invalid"
+              *ngIf="
+              this.orderForm.controls.firstName.touched &&
+              this.orderForm.controls.firstName.value === ''
+              ">
+               Required.
+            </div>
+            <div
+              class="invalid"
+              *ngIf="
+              this.orderForm.controls.firstName.touched &&
+              this.orderForm.controls.firstName.invalid
+              ">
+                Enter a valid first name.
+            </div>
+        </div>
+        <div class="form__information--combo">
+          <label for="" class="form__information--last-name">Last name</label>
+          <input type="text" placeholder="Last name" formControlName="lastName" class="form-control form__information--field form__information--input--last-name">
+          <div
+              class="invalid"
+              *ngIf="
+              this.orderForm.controls.lastName.touched &&
+              this.orderForm.controls.lastName.value === ''
+              ">
+               Required.
+            </div>
+            <div
+              class="invalid"
+              *ngIf="
+              this.orderForm.controls.lastName.touched &&
+              this.orderForm.controls.lastName.invalid
+              ">
+                Enter a valid last name.
+            </div>
+        </div>
+         <div class="form__information--combo">
+          <label for="" class="form__information--phone">Phone</label>
+          <input type="text" placeholder="Phone" formControlName="phone" class="form-control form__information--field form__information--input--phone">
+          <div
+              class="invalid"
+              *ngIf="
+              this.orderForm.controls.phone.touched &&
+              this.orderForm.controls.phone.value === ''
+              ">
+               Required.
+            </div>
+            <div
+              class="invalid"
+              *ngIf="
+              this.orderForm.controls.phone.touched &&
+              this.orderForm.controls.phone.invalid
+              ">
+                Enter a valid phone number.
+            </div>
+        </div>
+        <div class="form__information--combo">
+          <label for="" class="form__information--country">State</label>
+          <input type="text" placeholder="State" formControlName="state" class="form-control form__information--field form__information--input--country">
+          <div
+            class="invalid"
+            *ngIf="
+            this.orderForm.controls.state.touched &&
+            this.orderForm.controls.state.value === ''
+            ">
+           Required.
+          </div>
+        </div>
+        <div class="form__information--combo">
+          <label for="" class="form__information--county">County</label>
+          <input type="text" placeholder="County" formControlName="county" class="form-control form__information--field form__information--input--county">
+          <div
+            class="invalid"
+            *ngIf="
+            this.orderForm.controls.county.touched &&
+            this.orderForm.controls.county.value === ''
+            ">
+           Required.
+          </div>
+        </div>
+        <div class="form__information--combo">
+          <label for="" class="form__information--city">City</label>
+          <input type="text" placeholder="City" formControlName="city" class="form-control form__information--field form__information--input--city">
+          <div
+            class="invalid"
+            *ngIf="
+            this.orderForm.controls.city.touched &&
+            this.orderForm.controls.city.value === ''
+            ">
+           Required.
+          </div>
+        </div>
+        <div class="form__information--combo">
+          <label for="" class="form__information--street">Full address</label>
+          <input type="text" placeholder="Str. number apartment" formControlName="address" class="form-control form__information--field form__information--input--street">
+          <div
+            class="invalid"
+            *ngIf="
+            this.orderForm.controls.address.touched &&
+            this.orderForm.controls.address.value === ''
+            ">
+           Required.
+          </div>
+        </div>
+      </div>
+      <div class="form__information--shipping">
+        <div class="form__information--shipping-method">
+          <label for="courier" class="method" >
+            <div class="transport courier">
+              <input type="radio" id="courier" value="courier" (click)="onSetPrice(16.99)" formControlName="shippingMethod" name="shippingMethod" class="form__information--field form__information--input--shipping">
+              <div class="courier--details">
+                <h4 class="form__information--courier">Fast Courier</h4>
+                <p>Price: 16.99 RON</p>
+              </div>
+              <i class="fa fa-truck" aria-hidden="true"></i>
+            </div>
+          </label>
+          <label for="lift" class="method" >
+            <div class="transport personal_lift">
+              <input type="radio" id="lift" value="personal lift" (click)="onSetPrice(0)" formControlName="shippingMethod" name="shippingMethod" class="form__information--field form__information--input--shipping">
+              <div class="personal_lift--details">
+                <h4 class="form__information--courier">Personal lift</h4>
+                <p>Price: free</p>
+              </div>
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+            </div>
+          </label>
+          <div
+            class="invalid"
+            *ngIf="
+            this.orderForm.controls.shippingMethod.touched &&
+            this.orderForm.controls.shippingMethod.value === ''
+            ">
+           Required.
+          </div>
+        </div>
+      </div>  
+      <div class="form__submit">
+        <button class="btn button form__button--submit" [disabled]="orderForm.invalid">
+          BUY 
+        </button>
+      </div>
+    </form>
+    <div class="summary">
+      <h2 class="title">Summary</h2>
+      <div class="summary__books">
+        <!-- <ng-template *ngIf="cartBooks.length == 1; else moreBooks">
+          <div class="summary__books_informations" *ngFor="let book of cartBooks">
+            <p class="detail"><b>Price: </b> {{book.price}}</p>
+            <p class="detail"><b>Name:</b> {{book.title}}</p>
+            <p class="detail"><b>Quantity:</b> {{book.quantity}}</p>
+          </div>
+        </ng-template> -->
+          <div class="summary__books_informations" *ngFor="let book of cartBooks">
+            <p class="detail">Price: {{book.price}}</p>
+            <p class="detail">Name: {{book.title}}</p>
+            <p class="detail">Quantity: {{book.quantity}}</p>
+          </div>
+        <p class="detail total">Transport price: {{transportPrice}}</p>
+      </div>
+      <hr>
+      <p class="detail total">
+        <b>Total:</b> {{totalPrice}}
+      </p>
+    </div>
+  </div>

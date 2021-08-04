@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card__image">
+    <img [src]="book.imageUrl">
+  </div>
+  <div class="card__details">
+    <div class="card__details__delete">
+      <p class="card__details__delete--ptag">
+        <strong>Book Author:</strong>
+        {{book.author}}
+      </p>
+      <span (click)="emitBook()" class="newton-close"></span>
+    </div>
+    <div *ngIf="!showMore" class="card__details__fade"></div>
+    <div class="showmore">
+      <p class="{{!showMore ? 'card__details__content--show' : 'card__details__content--hide'}}">
+        <strong>Book Description:</strong>
+        {{book.description}}
+      </p>
+
+      <button class="btn btn-primary" (click)="toggleShowMore()">{{showMore! ? "Hide" : "Read More"}}</button>
+    </div>
+    <p>
+      <strong>Book Publishing House:</strong>
+      {{book.publishingHouse}}
+    </p>
+    <p>
+      <strong>Book Category:</strong>
+      {{book.category}}
+    </p>
+
+    <p><strong>{{book.price | currency: 'RON '}} x {{book.quantity}} pcs.</strong></p>
+  </div>
+</div>

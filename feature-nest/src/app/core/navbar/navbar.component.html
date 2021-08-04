@@ -1,0 +1,229 @@
+<nav>
+  <div *ngIf="!isActivatedSearchBar" class="nav nav__list">
+    <div class="nav__logo">
+      <a routerLink="/books"
+        ><si-newton-header-sag-logo
+          class="navbar-header"
+        ></si-newton-header-sag-logo
+      ></a>
+    </div>
+    <div class="nav__search-bar">
+      <input
+        id="search-text"
+        class="nav__search-bar__input"
+        type="search"
+        placeholder="Search"
+        [(ngModel)]="searchText"
+        (ngModelChange)="setSearchedBookName()"
+      />&nbsp;
+      <button class="nav__search__button">
+        <span class="newton-search"></span>
+      </button>
+    </div>
+    <div
+      (clickOutside)="isActivatedAccountMenu = false"
+      (click)="toggleAccountMenu()"
+      class="nav__account-icon"
+    >
+      <span
+        class="newton-user-account"
+        [ngClass]="{ active: this.isActivatedAccountMenu }"
+      ></span>
+    </div>
+    <div
+      class="nav__wishlist-icon"
+      (clickOutside)="isActivatedWishList = false"
+      (click)="onToggleWishList()"
+    >
+      <span
+        class="newton-outline"
+        [ngClass]="{ active: this.isActivatedWishList }"
+      ></span>
+    </div>
+    <div
+      class="nav__shoping-cart"
+      (clickOutside)="isActivatedCart = false"
+      (click)="toggleCart()"
+    >
+      <span
+        class="newton-shopping-cart"
+        [ngClass]="{ active: this.isActivatedCart }"
+      ></span
+      >&nbsp;<span class="nav__shopping-cart__products"
+        >(<span *ngIf="cartBook$ | async as cartBooks">{{
+          cartBooks.numberOfProducts
+        }}</span
+        >)</span
+      >
+    </div>
+    <div class="nav__search-icon">
+      <span (click)="toggleSearchBar()" class="newton-search new"></span>
+    </div>
+    <div class="nav__search__open">
+      <span
+        *ngIf="!isMobileVersion"
+        (click)="toggleSearchBar()"
+        class="newton-search"
+      ></span>
+    </div>
+    <div class="nav__hamburger--open">
+      <button
+        (click)="toggleMenuHamburger()"
+        [ngClass]="{
+          'newton-menu': !isMobileVersion,
+          'newton-close': isMobileVersion
+        }"
+        (clickOutside)="this.isMobileVersion = false"
+      ></button>
+    </div>
+    <a
+      routerLink="/auth/login"
+      *ngIf="isMobileVersion"
+      class="link nav__list__account nav__list--align"
+      >My Account</a
+    >
+    <a
+      routerLink="auth/registration"
+      *ngIf="isMobileVersion"
+      class="link nav__list__register nav__list--align"
+      >Register</a
+    >
+    <a
+      href=""
+      *ngIf="isMobileVersion"
+      class="link nav__list__wishlist nav__list--align"
+      >Wishlist</a
+    >
+    <a
+      href=""
+      *ngIf="isMobileVersion"
+      class="link nav__list__cart nav__list--align"
+      routerLink="/shoppingcart"
+      >Cart (<span *ngIf="cartBook$ | async as cartBooks">{{
+        cartBooks.numberOfProducts
+      }}</span
+      >)</a
+    >
+  </div>
+
+  <!-- searchBar with full width -->
+  <div *ngIf="isActivatedSearchBar" class="nav__list--open">
+    <span
+      (click)="toggleSearchBar()"
+      class="nav__list--open__back newton-arrow-left-large"
+    ></span
+    >&nbsp;
+    <input
+      class="nav__list--open__search-bar"
+      type="search"
+      placeholder="Search"
+      [(ngModel)]="searchText"
+      (ngModelChange)="setSearchedBookName()"
+    />&nbsp;
+    <span class="nav__list--open__search-icon newton-search"></span>
+  </div>
+
+  <!-- Account Menu -->
+  <div *ngIf="isActivatedAccountMenu" class="nav__account__menu">
+    <div class="arrow"></div>
+    <ul class="nav__account__menu__link">
+      <li class="nav-list">
+        <img src="assets/account.svg" />
+      </li>
+      <a
+        class="link"
+        routerLink="/auth/login"
+        (click)="toggleAccountMenu()"
+        *ngIf="!isAuthenticated"
+        ><li class="nav__accout__menu__logIn">Log in</li></a
+      >
+      <a
+        class="link"
+        routerLink="/auth/registration"
+        (click)="toggleAccountMenu()"
+        *ngIf="!isAuthenticated"
+        ><li class="nav__account__menu__register">Register</li></a
+      >
+      <a class="link" (click)="toggleAccountMenu()" *ngIf="isAuthenticated"
+        ><li class="nav__accout__menu__logIn">Profile</li></a
+      >
+      <a class="link" (click)="toggleAccountMenu()" *ngIf="isAuthenticated"
+        ><li class="nav__account__menu__register" (click)="onLogOut()">
+          Log out
+        </li></a
+      >
+    </ul>
+  </div>
+
+  <!-- Cart -->
+  <div *ngIf="isActivatedCart" class="nav__cart">
+    <ng-container *ngIf="cartBook$ | async as cartBooks">
+      <div class="arrow__cart"></div>
+      <ul class="nav__account__menu__link">
+        <li *ngIf="cartBooks.numberOfProducts != 0" class="nav-list">
+          {{
+            cartBooks.numberOfProducts === 1
+              ? "Cart(" + cartBooks.numberOfProducts + " product)"
+              : "Cart(" + cartBooks.numberOfProducts + " products)"
+          }}
+          <hr />
+        </li>
+
+        <ng-container *ngIf="cartBooks.numberOfProducts === 0">
+          <li class="nav-list">Shopping Cart is empty</li>
+        </ng-container>
+
+        <ng-container
+          *ngIf="cartBooks.numberOfProducts != 0 && cartBooks.books"
+        >
+          <div class="products__container">
+            <app-book-detail-cart-popover
+              *ngFor="let book of transformFromObjectToArray(cartBooks.books)"
+              class="products__book"
+              [book]="book"
+              (deleteBook)="deleteProduct($event)"
+            ></app-book-detail-cart-popover>
+          </div>
+          <div class="div"><hr /></div>
+          <div class="total">
+            <div class="total__title">Subtotal:</div>
+            <div class="total__price">
+              {{ cartBooks.subtotalPriceProducts | currency: "RON " }}
+            </div>
+          </div>
+          <br />
+
+          <button
+            class="btn btn-primary btn__view-cart"
+            routerLink="/shoppingcart"
+          >
+            <span class="view__cart__text">View cart</span>
+          </button>
+        </ng-container>
+      </ul>
+    </ng-container>
+  </div>
+
+  <!-- WishList -->
+  <div *ngIf="isActivatedWishList" class="nav__cart">
+    <div class="arrow__wishList"></div>
+    <ng-container *ngIf="!isAuthenticated; else isAuth">
+      <a class="wishlist__login" [routerLink]="['/auth/login']">Log in </a> to
+      add to wishlist
+    </ng-container>
+    <ng-template #isAuth>
+      <ng-container *ngIf="wishListBooks | async as books">
+        Your Wishlist
+        <div *ngIf="books.length === 0">No books</div>
+        <div class="products__container">
+          <app-wishlist-popover
+            *ngFor="let book of books"
+            class="products__book"
+            [book]="book"
+            (emitBook)="deleteProductFromWishList($event)"
+          ></app-wishlist-popover>
+        </div>
+      </ng-container>
+    </ng-template>
+  </div>
+</nav>

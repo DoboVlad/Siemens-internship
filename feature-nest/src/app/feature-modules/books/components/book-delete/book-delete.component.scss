@@ -1,0 +1,15 @@
+@import "/src/mixins.scss";
+.btn-delete {
+    border-radius: 30px;
+    background-color: red;
+    border: red;
+    color: white;
+    width: 200px;
+  }
+  
+  .btn-delete:hover {
+    border-radius: 20px;
+    background-color: white;
+    color: $app-blue-dark;
+    border: 2px solid red;
+  }

@@ -1,0 +1,128 @@
+<div class="container">
+  
+
+  <form [formGroup]="bookForm" (ngSubmit)="submit()" id="book-form">
+    <label for="bookTitle">Book name:</label>
+    <div
+      class="form-group"
+      [ngClass]="{
+        error:
+          bookForm.controls.title.invalid && bookForm.controls.title.touched
+      }"
+    >
+      <input
+        formControlName="title"
+        name="title"
+        id="bookTitle"
+        type="text"
+        class="form-control"
+        placeholder="Book name"
+      />
+    </div>
+    <label for="bookAuthor">Author: </label>
+    <em class="invalidInput" *ngIf="!isAuthorValid()"
+      >Author name may contain only letters!</em
+    >
+    <div class="form-group" [ngClass]="{ error: !isAuthorValid() }">
+      <input
+        formControlName="author"
+        name="author"
+        id="bookAuthor"
+        type="text"
+        class="form-control"
+        placeholder="Book Author"
+      />
+    </div>
+    <label for="bookPrice">Price: </label>
+    <em class="invalidInput" *ngIf="!isPriceValid()"
+      >Price may contain only numbers</em
+    >
+    <div class="form-group" [ngClass]="{ error: !isPriceValid() }">
+      <input
+        formControlName="price"
+        name="price"
+        id="bookPrice"
+        type="text"
+        class="form-control"
+        placeholder="Book Price"
+      />
+    </div>
+    <label for="bookPublishingHouse">Publishing House: </label>
+    <div class="form-group">
+      <input
+        formControlName="publishingHouse"
+        name="publishingHouse"
+        id="bookPublishingHouse"
+        type="text"
+        class="form-control"
+        placeholder="Book Publishing House"
+      />
+    </div>
+    <label for="bookCategory">Category: </label>
+    <div class="form-group">
+      <si-newton-form-group  >
+        <input 
+          autocomplete="off"
+          formControlName="category"
+          name = "category"
+          placeholder="Book Category"
+          [typeahead]="categoriesName"
+          [typeaheadScrollable]="true"
+          [typeaheadOptionsInScrollableView]="8"
+          siNewton>
+      </si-newton-form-group>
+      
+    </div>
+    <label for="bookDescription">Description: </label>
+    <div class="form-group">
+      <input
+        formControlName="description"
+        name="description"
+        id="bookDescription"
+        type="text"
+        class="form-control"
+        placeholder="Book Description"
+      />
+    </div>
+
+    <label for="imageUrl">Upload an image: </label>
+    <div class="form-group">
+      <input
+        required
+        name="imageUrl"
+        id="imageUrl"
+        type="file"
+        class="form-control"
+        placeholder="Book Image"
+        accept="image/*"
+        (change)="onUploadBookImage($event)"
+      />
+     
+        <img class="container__book--image" [src]="imgSrc" height="100px">
+    
+    </div>
+
+  
+    <hr id="hr-style" />
+    <input type="submit" value="Save" hidden id="save-form" />
+
+    <button
+      *ngIf="isAddMode"
+      type="submit"
+      class="btn btn-secondary"
+      [disabled]="bookForm.invalid"
+    >
+      Add
+    </button>
+    <button
+      *ngIf="!isAddMode"
+      type="button"
+      class="btn btn-secondary"
+      [disabled]="!isFormValid()"
+      
+      (click)="!isMobile ? closeForm() : null; submitPressed()"
+    >
+      Edit
+    </button>
+  </form>
+</div>

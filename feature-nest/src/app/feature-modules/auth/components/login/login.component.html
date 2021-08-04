@@ -1,0 +1,77 @@
+<div class="main-container">
+    <div class="container__form">
+      <form class="container__login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()"> 
+          <div class="form__title">
+            <h3>Welcome back. Please login to your account.</h3>
+          </div>
+          <div class="group__form group__form--email">
+            <label for="email">Email:</label>
+            <div class="form-group">
+                <input
+                    formControlName="email"
+                    name="title"
+                    id="email"
+                    type="text"
+                    class="form-control"
+                    placeholder="Email"
+                />
+                <div
+                    class="invalid"
+                    *ngIf="
+                    this.loginForm.controls.email.touched &&
+                    this.loginForm.controls.email.value === ''
+                    ">
+                    Required.
+                </div>
+                <div
+                    class="invalid"
+                    *ngIf="
+                    this.loginForm.controls.email.touched &&
+                    this.loginForm.controls.email.invalid
+                    ">
+                    Enter a valid email.
+                </div>
+            </div>
+          </div>
+          <div class="group__form group__form--password">
+            <label for="Password">Password:</label>
+            <div class="form-group">
+              <input
+                formControlName="password"
+                name="title"
+                id="Password"
+                type="password"
+                class="form-control"
+                placeholder="password"
+              />
+                <div
+                    class="invalid"
+                    *ngIf="
+                    this.loginForm.controls.password.touched &&
+                    this.loginForm.controls.password.value === ''
+                    ">
+                    Required.
+                </div>
+                <p class="invalid" *ngIf="error">{{error}}</p>
+            </div>
+          </div>
+          <div class="buttons__container">
+            <div class="login forgot__password">
+                <button type="submit" class="btn button button__login"
+                    [disabled]="loginForm.invalid">
+                    Login
+                </button>
+            </div>
+            <div class="registration">
+              <button class="btn button button__register" routerLink="/auth/registration">
+                  Register
+              </button>
+            </div>
+          </div>
+          <p class="forgot__password__text">Forgot password?</p>
+        </form>
+    </div>
+    <div class="main__image">
+      <img src="../../../../assets/images/3.png" width="100%" alt="Login image">
+    </div>
+  </div>

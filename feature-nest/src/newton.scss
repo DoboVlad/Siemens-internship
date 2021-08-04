@@ -1,0 +1,124 @@
+// import of newton-bootstrap. The order is essential
+$image-path: "~@simpl/newton-bootstrap/dist/images/";
+
+@import "~@simpl/newton-bootstrap/src/styles/functions";
+@import "~@simpl/newton-bootstrap/src/styles/siemens-colors";
+@import "~@simpl/newton-bootstrap/src/styles/newton-variables";
+@import "~@simpl/newton-bootstrap/src/styles/variables";
+@import "~@simpl/newton-bootstrap/src/styles/mixins";
+
+
+@import "~@simpl/newton-bootstrap/src/styles/reboot";
+@import "~@simpl/newton-bootstrap/src/styles/images";
+@import "~@simpl/newton-bootstrap/src/styles/code";
+@import "~@simpl/newton-bootstrap/src/styles/grid";
+@import "~@simpl/newton-bootstrap/src/styles/tables";
+@import "~@simpl/newton-bootstrap/src/styles/forms";
+@import "~@simpl/newton-bootstrap/src/styles/buttons";
+@import "~@simpl/newton-bootstrap/src/styles/transitions";
+@import "~@simpl/newton-bootstrap/src/styles/dropdown";
+@import "~@simpl/newton-bootstrap/src/styles/button-group";
+@import "~@simpl/newton-bootstrap/src/styles/input-group";
+@import "~@simpl/newton-bootstrap/src/styles/custom-forms";
+@import "~@simpl/newton-bootstrap/src/styles/nav";
+@import "~@simpl/newton-bootstrap/src/styles/navbar";
+@import "~@simpl/newton-bootstrap/src/styles/card";
+@import "~@simpl/newton-bootstrap/src/styles/breadcrumb";
+@import "~@simpl/newton-bootstrap/src/styles/pagination";
+@import "~@simpl/newton-bootstrap/src/styles/badge";
+@import "~@simpl/newton-bootstrap/src/styles/jumbotron";
+@import "~@simpl/newton-bootstrap/src/styles/alerts";
+@import "~@simpl/newton-bootstrap/src/styles/progress";
+@import "~@simpl/newton-bootstrap/src/styles/media";
+@import "~@simpl/newton-bootstrap/src/styles/list-group";
+@import "~@simpl/newton-bootstrap/src/styles/close";
+@import "~@simpl/newton-bootstrap/src/styles/toasts";
+@import "~@simpl/newton-bootstrap/src/styles/modals";
+@import "~@simpl/newton-bootstrap/src/styles/tooltip";
+@import "~@simpl/newton-bootstrap/src/styles/popover";
+@import "~@simpl/newton-bootstrap/src/styles/carousel";
+@import "~@simpl/newton-bootstrap/src/styles/spinners";
+@import "~@simpl/newton-bootstrap/src/styles/utilities";
+@import "~@simpl/newton-bootstrap/src/styles/print";
+
+@import "~@simpl/newton-bootstrap/src/styles/sidebar";
+@import "~@simpl/newton-bootstrap/src/styles/type";
+
+// newton specific styles
+@import "~@simpl/newton-bootstrap/src/styles/navbar-statusbar";
+@import "~@simpl/newton-bootstrap/src/styles/navbar-breadcrumbs";
+@import "~@simpl/newton-bootstrap/src/styles/newton-sections";
+
+// newton-ng specific styles
+@import "~@simpl/newton-ng/theme";
+
+// setting up newton-icons
+$font-path: "~@simpl/newton-icons/dist/fonts";
+@import "~@simpl/newton-icons/dist/styles/simpl-icons-newton";
+
+// setting up simpl-fonts
+// $font-path: '~@simpl/fonts/dist/fonts';
+// @import "~@simpl/fonts/src/styles/siemens-fonts";
+
+
+// import of newton-bootstrap. The order is essential
+$image-path: "~@simpl/newton-bootstrap/dist/images/";
+
+@import "~@simpl/newton-bootstrap/src/styles/functions";
+@import "~@simpl/newton-bootstrap/src/styles/siemens-colors";
+@import "~@simpl/newton-bootstrap/src/styles/newton-variables";
+@import "~@simpl/newton-bootstrap/src/styles/variables";
+@import "~@simpl/newton-bootstrap/src/styles/mixins";
+
+
+@import "~@simpl/newton-bootstrap/src/styles/reboot";
+@import "~@simpl/newton-bootstrap/src/styles/images";
+@import "~@simpl/newton-bootstrap/src/styles/code";
+@import "~@simpl/newton-bootstrap/src/styles/grid";
+@import "~@simpl/newton-bootstrap/src/styles/tables";
+@import "~@simpl/newton-bootstrap/src/styles/forms";
+@import "~@simpl/newton-bootstrap/src/styles/buttons";
+@import "~@simpl/newton-bootstrap/src/styles/transitions";
+@import "~@simpl/newton-bootstrap/src/styles/dropdown";
+@import "~@simpl/newton-bootstrap/src/styles/button-group";
+@import "~@simpl/newton-bootstrap/src/styles/input-group";
+@import "~@simpl/newton-bootstrap/src/styles/custom-forms";
+@import "~@simpl/newton-bootstrap/src/styles/nav";
+@import "~@simpl/newton-bootstrap/src/styles/navbar";
+@import "~@simpl/newton-bootstrap/src/styles/card";
+@import "~@simpl/newton-bootstrap/src/styles/breadcrumb";
+@import "~@simpl/newton-bootstrap/src/styles/pagination";
+@import "~@simpl/newton-bootstrap/src/styles/badge";
+@import "~@simpl/newton-bootstrap/src/styles/jumbotron";
+@import "~@simpl/newton-bootstrap/src/styles/alerts";
+@import "~@simpl/newton-bootstrap/src/styles/progress";
+@import "~@simpl/newton-bootstrap/src/styles/media";
+@import "~@simpl/newton-bootstrap/src/styles/list-group";
+@import "~@simpl/newton-bootstrap/src/styles/close";
+@import "~@simpl/newton-bootstrap/src/styles/toasts";
+@import "~@simpl/newton-bootstrap/src/styles/modals";
+@import "~@simpl/newton-bootstrap/src/styles/tooltip";
+@import "~@simpl/newton-bootstrap/src/styles/popover";
+@import "~@simpl/newton-bootstrap/src/styles/carousel";
+@import "~@simpl/newton-bootstrap/src/styles/spinners";
+@import "~@simpl/newton-bootstrap/src/styles/utilities";
+@import "~@simpl/newton-bootstrap/src/styles/print";
+
+@import "~@simpl/newton-bootstrap/src/styles/sidebar";
+@import "~@simpl/newton-bootstrap/src/styles/type";
+
+// newton specific styles
+@import "~@simpl/newton-bootstrap/src/styles/navbar-statusbar";
+@import "~@simpl/newton-bootstrap/src/styles/navbar-breadcrumbs";
+@import "~@simpl/newton-bootstrap/src/styles/newton-sections";
+
+// newton-ng specific styles
+@import "~@simpl/newton-ng/theme";
+
+// setting up newton-icons
+$font-path: "~@simpl/newton-icons/dist/fonts";
+@import "~@simpl/newton-icons/dist/styles/simpl-icons-newton";
+
+// // setting up simpl-fonts
+// $font-path: '~@simpl/fonts/dist/fonts';
+// @import "~@simpl/fonts/src/styles/siemens-fonts";

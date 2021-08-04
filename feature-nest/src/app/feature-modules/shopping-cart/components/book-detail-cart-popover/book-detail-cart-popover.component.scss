@@ -1,0 +1,97 @@
+@import "/src/mixins.scss";
+
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.products__container {
+  display: grid;
+  grid-auto-columns: 75px auto 40px;
+  grid-gap: 10px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.products__url {
+  text-decoration: none;
+  color: black;
+}
+
+.products__url:hover {
+  text-decoration: underline;
+}
+
+.products__container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.products__container::-webkit-scrollbar-track {
+  background: $scollbar-track-background;
+}
+
+.products__container::-webkit-scrollbar-thumb {
+  background: $scollbar-thumb-background;
+}
+
+.products__container::-webkit-scrollbar-thumb:hover {
+  background: $scollbar-thumb-background-hover;
+}
+
+.products__img {
+  height: 112px;
+  width: 75px;
+  grid-column: 1/2;
+}
+
+.products__detail {
+  grid-column: 2/3;
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.products__detail__author {
+  grid-row: 1/2;
+  font-weight: 600;
+  text-align: left;
+  font-size: 12px;
+}
+
+.products__detail__title {
+  grid-row: 2/3;
+  text-align: left;
+  height: 20px;
+  overflow: hidden;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  font-style: italic;
+}
+
+.delete {
+  grid-column: 3/4;
+  cursor: pointer;
+  align-content: center;
+  display: grid;
+  text-align: center;
+  justify-content: center;
+
+  // &:hover {
+  //   transform: scale(1.1);
+  // }
+}
+
+.products__detail__quantity {
+  grid-row: 3/4;
+  text-align: left;
+  height: 20px;
+  font-size: 12px;
+}
+
+.products__detail__price {
+  grid-row: 4/5;
+  text-align: left;
+  height: 20px;
+  font-size: 12px;
+}

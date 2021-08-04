@@ -1,0 +1,140 @@
+@import "/src/mixins.scss";
+
+$error-input-color: red;
+
+$input-placeholder-color: #999;
+
+$valid-input-icon-color: green;
+
+$invalid-input-icon-color: red;
+
+@mixin input-placeholder-color($color) {
+  -webkit-input-placeholder-color: $color;
+  -moz-placeholder-color: $color;
+  -ms-input-placeholde: $color;
+}
+
+.header__title {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.form-group > .form-control,
+.form-group .input-group > .form-control {
+  padding: 0px 10px 0px 10px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.btn__create-account {
+  width: 100%;
+  transition: all 0.3s;
+  cursor: pointer;
+  background-color: $app-blue-light;
+  color: white;
+  font-weight: 300;
+  border: none;
+  padding: 4px;
+  justify-self: center;
+  border-radius: 20px;
+}
+
+.btn__create-account:hover:enabled {
+  transform: scale(1.03);
+  background-color: $app-blue-dark;
+}
+
+.btn__close-modal {
+  text-align: center;
+  border-radius: 20px;
+  background-color: $app-blue-light;
+  color: white;
+  border: none;
+}
+
+.btn__close-modal:hover {
+  text-align: center;
+  border-radius: 20px;
+  background-color: $app-blue-dark;
+  color: white;
+}
+
+.span__logIn {
+  text-align: center;
+}
+
+.span__logIn--link {
+  font-weight: bold;
+  color: $app-blue-light;
+  text-decoration: none;
+  cursor: pointer;
+}
+.span__logIn--link:hover {
+  color: $app-blue-dark;
+}
+
+.span__terms__service--link {
+  font-weight: bold;
+  color: $app-blue-light;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.span__terms__service--link:hover {
+  color: $app-blue-dark;
+}
+
+.validators {
+  margin-left: 20px;
+  color: $error-input-color;
+  transition: all 0.5s;
+}
+
+.input__invalid {
+  color: $error-input-color;
+  font-weight: 400;
+  color: $error-input-color;
+  margin-top: -30px;
+  margin: 0;
+  padding: 0;
+}
+
+.input__error {
+  background-color: #ffdbdb;
+  border: 1px solid $error-input-color;
+}
+
+.span__error--green {
+  color: $valid-input-icon-color;
+}
+
+.span__error--red {
+  color: $invalid-input-icon-color;
+}
+
+.input-group-text {
+  background-color: transparent;
+  border: none;
+  float: right;
+  margin-right: 5px;
+  margin-top: -34px;
+}
+
+.spinner__wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background: rgba(161, 161, 196, 0.47);
+  z-index: 998;
+}

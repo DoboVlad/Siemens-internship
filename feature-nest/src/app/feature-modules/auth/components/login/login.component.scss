@@ -1,0 +1,107 @@
+@import "/src/mixins.scss";
+
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 50vh;
+
+    @include respond(br3){
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-control {
+    padding: 4px;
+}
+
+.container__form {
+    padding: 30px;
+}
+
+.forgot__password {
+    width: 100%;
+    height: 100%;
+    display: grid;
+}
+
+.forgot__password__text {
+    padding: 0;
+    margin: 0;
+}
+
+.form__title {
+    display: grid;
+    align-content: center;
+}
+
+.group__form {
+    width: 60%;
+}
+
+.group__form--email {
+    grid-row: 2 / 3;
+}
+
+.group-form--password {
+    grid-row: 3 / 4;
+}
+
+.container__login-form {
+    height: 100%;
+    display: grid;
+    grid-template-rows: repeat(3, 0.5fr) 0.2fr 0.5fr;
+    align-content: center;
+
+    @include respond(br3){
+        grid-template-rows: 0.5fr repeat(2, 2fr) 0.7fr 0.1fr;
+    }
+}
+
+.buttons__container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: start;
+    grid-row: 4 / 5;
+    height: 20%;
+
+    @include respond(br3){
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+.button__login {
+    grid-column: 1 / 2;
+}
+
+.button__register {
+    grid-column: 3 / 4;
+    
+}
+
+.registration{
+    width: 100%;
+    display: grid;
+    height: 100%;
+}
+
+.invalid {
+    font-weight: 400;
+    color: $invalid-message-error;
+    margin: 0;
+    padding: 0;
+}
+
+.button {
+    background-color: $app-blue-dark;
+    color: $app-white;
+    border-radius: 20px;
+}
+
+.main__image {
+    margin: 0;
+    height: 100%;
+
+    @include respond(br3){
+        display: none;
+    }
+}

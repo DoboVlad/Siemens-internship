@@ -1,0 +1,333 @@
+<div class="spinner-wrapper" *ngIf="isLoadingData$ | async">
+  <app-book-loader></app-book-loader>
+</div>
+<!-- Template for desktop -->
+<ng-template [ngIf]="!isEditMobile">
+  <div class="book">
+    <ng-container *ngIf="editedBook$ | async as bookAsync">
+      <div class="book__image">
+        <img
+          class="container__book--image"
+          [src]="!!bookAsync.imageUrl ? bookAsync.imageUrl : noImage"
+        />
+      </div>
+      <div class="book__detail">
+        <div class="book__detail__container">
+          <div
+            class="book_datail__rating_container"
+            (click)="isUserAuth ? openForm(ratingModal) : redirectLogin()"
+          >
+            <app-rating-display
+              [bookId]="productId"
+              [nrRatings]="nrOfRatings"
+            ></app-rating-display>
+          </div>
+          <!-- Rating Modal -->
+          <ng-template #ratingModal>
+            <form [formGroup]="userReview" (ngSubmit)="ratingSubmit()">
+              <div class="book__rating">
+                <div class="book__rating__modal">
+                  <div class="book__rating__modal__text">
+                    Review this product<br />
+                    Share your thoughts with other customers
+                  </div>
+                  <div class="book__rating__modal__stars">
+                    <input
+                      class="book__rating__modal__input"
+                      type="radio"
+                      formControlName="rate"
+                      value="5"
+                      id="rate-5"
+                    />
+                    <label
+                      for="rate-5"
+                      class="book__rating__modal__star fa fa-star"
+                    ></label>
+                    <input
+                      class="book__rating__modal__input"
+                      type="radio"
+                      formControlName="rate"
+                      value="4"
+                      id="rate-4"
+                    />
+                    <label
+                      for="rate-4"
+                      class="book__rating__modal__star fa fa-star"
+                    ></label>
+                    <input
+                      class="book__rating__modal__input"
+                      type="radio"
+                      formControlName="rate"
+                      value="3"
+                      id="rate-3"
+                    />
+                    <label
+                      for="rate-3"
+                      class="book__rating__modal__star fa fa-star"
+                    ></label>
+                    <input
+                      class="book__rating__modal__input"
+                      type="radio"
+                      formControlName="rate"
+                      value="2"
+                      id="rate-2"
+                    />
+                    <label
+                      for="rate-2"
+                      class="book__rating__modal__star fa fa-star"
+                    ></label>
+                    <input
+                      class="book__rating__modal__input"
+                      type="radio"
+                      formControlName="rate"
+                      value="1"
+                      id="rate-1"
+                    />
+                    <label
+                      for="rate-1"
+                      class="book__rating__modal__star fa fa-star"
+                    ></label>
+                  </div>
+                  <div class="book__rating__modal__textarea">
+                    <textarea
+                      cols="40"
+                      rows="4"
+                      formControlName="comment"
+                      #comm
+                      placeholder="Describe your experience.."
+                    ></textarea>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-secondary book__rating__modal--post"
+                >
+                  Post review
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger book__rating__modal--cancel"
+                  (click)="closeForm()"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </ng-template>
+
+          <div class="book__detail__author">
+            {{ bookAsync.author }}
+          </div>
+          <div class="book__detail__title">
+            {{ bookAsync.title }}
+          </div>
+          <div class="book__detail__publishing-house">
+            Publishing house: {{ bookAsync.publishingHouse }}
+          </div>
+          <div class="book__detail__price">
+            Price: {{ bookAsync.price }} Ron
+          </div>
+          <div class="book__detail__category">
+            <span class="book_detail__category__bold">Category: </span
+            >{{ bookAsync.category }}
+          </div>
+
+          <button
+            (click)="addToCart(bookAsync)"
+            type="button"
+            class="btn btn-primary btn__add-to-cart"
+          >
+            Add to cart
+          </button>
+          <button
+            class="btn btn-primary btn__add-wishlist"
+            (click)="addToWishList(bookAsync)"
+          >
+            Add to wishlist
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary btn__open-modal"
+            *ngIf="isMobile$ | async; else desktopView"
+            (click)="setCurrentBook(bookAsync)"
+          >
+            Edit
+          </button>
+          <ng-template [ngIf]="authSource | async">
+            <app-book-delete
+              class="app-book-detail--delete"
+              *ngIf="editedBook$ | async as editedBookAsync"
+            ></app-book-delete>
+          </ng-template>
+
+          <ng-template #desktopView [ngIf]="authSource | async">
+            <button
+              class="btn btn-primary btn__open-modal"
+              (click)="openForm(editBookModal); setEditFormValues(bookAsync)"
+              #openModall
+              *ngIf="authSource | async"
+            >
+              Edit
+            </button>
+
+            <!-- Edit book modal -->
+            <ng-template #editBookModal>
+              <div class="modal-header">
+                <h4 class="modal-title">Edit Book</h4>
+                <span class="close btn--exit" (click)="closeForm()"></span>
+              </div>
+              <div class="modal-body">
+                <span>
+                  <app-book-edit
+                    *ngIf="editedBookFromForm$ | async as editedBookAsync"
+                    [book]="editedBookAsync"
+                    (onEmitValues)="
+                      openConfirmModal(confirmModal); getFormValues($event)
+                    "
+                  ></app-book-edit>
+                  <button
+                    type="button"
+                    class="btn btn-danger btn--close"
+                    (click)="closeForm()"
+                  >
+                    Cancel
+                  </button>
+                </span>
+              </div>
+            </ng-template>
+
+            <!-- Confirm modal for desktop -->
+            <ng-template #confirmModal>
+              <div class="modal-body text-center">
+                <p>Are you sure you want to edit the book?</p>
+                <label
+                  for="save-form"
+                  class="btn btn-default"
+                  (click)="submit(currentBook)"
+                  >Yes</label
+                >
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="openForm(editBookModal); closeConfirmModal()"
+                >
+                  No
+                </button>
+              </div>
+            </ng-template>
+          </ng-template>
+        </div>
+      </div>
+      <div class="book__description">
+        <p class="book__description__title">Description:</p>
+        <div *ngIf="!showMore" class="book__description__fade"></div>
+        <p
+          class="
+            {{
+            showMore!
+              ? 'book__description__content--show'
+              : 'book__description__content--hide'
+          }}
+          "
+        >
+          {{ bookAsync.description }}
+        </p>
+        <button
+          type="button"
+          class="btn btn-primary btn__read-more"
+          (click)="toggleShowDescription()"
+        >
+          {{ showMore! ? "Hide" : "Read more" }}
+        </button>
+      </div>
+      <div class="rating">
+        <div class="rating__container">
+          <p class="rating__title">Ratings</p>
+
+          <ng-container *ngFor="let bookReview of bookReviews">
+            <div class="book__detail__rating">
+              <ng-container
+                *ngFor="let index of [].constructor(+bookReview.rate)"
+              >
+                <span class="fa fa-star checked"></span>
+              </ng-container>
+              <ng-container
+                *ngFor="let index of [].constructor(5 - bookReview.rate)"
+              >
+                <span class="fa fa-star"></span>
+              </ng-container>
+            </div>
+            <!-- <p class="rating__user">{{bookReview.userId}}</p> -->
+            <p class="rating__comment">{{ bookReview.comment }}</p>
+          </ng-container>
+          <div class="rating__no-container" *ngIf="bookReviews.length === 0">
+            No ratings
+          </div>
+        </div>
+      </div>
+
+      <div class="books">
+        <div class="books__container">
+          <p class="books__title">Books recommended</p>
+
+          <div class="books__recomended">
+            <div (click)="scrollLeft()" class="books__recomended__next">
+              <img
+                class="arrow"
+                src="https://img.icons8.com/material-sharp/24/000000/long-arrow-left.png"
+              />
+            </div>
+
+            <ul #booksList class="books__recomended__list full">
+              <li *ngFor="let item of recommendedBooksSorted" class="item">
+                <app-book [book]="item"></app-book>
+              </li>
+            </ul>
+            <div (click)="scrollRight()" class="books__recomended__back">
+              <img
+                class="arrow"
+                src="https://img.icons8.com/material-rounded/24/000000/long-arrow-right.png"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<!-- Template for mobile -->
+<ng-template [ngIf]="isEditMobile">
+  <app-book-edit
+    *ngIf="editedBookFromForm$ | async as editedBookAsync"
+    [book]="editedBookAsync"
+    (onEmitValues)="openConfirmModal(confirmModalMobile); getFormValues($event)"
+  ></app-book-edit>
+  <button
+    type="button"
+    class="btn btn-danger btn--close"
+    (click)="isEditMobile = false"
+  >
+    Back
+  </button>
+
+  <!-- Confirm modal for Mobile -->
+  <ng-template #confirmModalMobile>
+    <div class="modal-body text-center">
+      <p>Are you sure you want to edit the book?</p>
+      <label
+        for="save-form"
+        class="btn btn-default"
+        (click)="submit(currentBook)"
+        >Yes</label
+      >
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="closeConfirmModal()"
+      >
+        No
+      </button>
+    </div>
+  </ng-template>
+</ng-template>

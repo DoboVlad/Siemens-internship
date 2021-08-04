@@ -1,0 +1,27 @@
+<button type="button"
+  class="btn btn-outline-danger btn-delete"
+  *ngIf="!isAdmin"
+  (click)="openModal(template)">Delete</button>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title">Delete book</h4>
+  </div>
+  <div class="modal-body">
+    Are you sure you want to delete the selected book?
+  </div>
+  <div class="modal-footer">
+    <button 
+    class="btn btn-outline-secondary"
+    (click)="modalRef.hide()">
+      <span class="newton-close"></span>
+      Cancel
+    </button>
+    <button 
+    class="btn btn-primary"
+    (click)="onOkDelete()">
+      <span class="newton-open"></span>
+      OK
+    </button>
+  </div>
+</ng-template>

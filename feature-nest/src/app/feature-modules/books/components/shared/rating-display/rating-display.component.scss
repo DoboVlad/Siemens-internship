@@ -1,0 +1,38 @@
+@import "/src/mixins.scss";
+.rating__stars{
+    position:relative;
+    cursor:pointer;
+  }
+
+.rating {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 4px;
+}
+
+.rating__number {
+    display: grid;
+    justify-content: left;
+}
+
+.rating__full-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: $app-yellow-star;
+}
+
+.rating__empty-stars:before, .rating__full-stars:before {
+    content:$app-5-star-icon;
+}
+    
+.rating__empty-stars:before {
+    -webkit-text-stroke: 1px $app-gray-star;
+}
+    
+.rating__full-stars:before {
+    -webkit-text-stroke: 1px $app-yellow-star;
+}
+  

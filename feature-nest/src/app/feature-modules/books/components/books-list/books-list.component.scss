@@ -1,0 +1,400 @@
+@import "/src/mixins.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  padding: 10px 0px;
+
+  .add-button {
+    text-align: center;
+    background-color: $app-blue-light;
+    color: $app-blue-dark;
+    border: none;
+    width: 50%;
+    font-size: small;
+    padding: 4px;
+    justify-self: center;
+    border-radius: 20px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    }
+    @include respond(br4) {
+      width: 100%;
+    }
+  }
+
+  @include respond(br4) {
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+  }
+}
+
+.modal-header {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  padding: 10px;
+  grid-template-columns: repeat(3, 1fr);
+
+  .modal-title {
+    grid-column: 2/3;
+  }
+}
+.modal-body {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.container {
+  min-width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-gap: 10px;
+  min-height: 100%;
+  grid-template-columns: 0.2fr 1fr;
+
+  &__books {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: min-content;
+
+    grid-gap: 30px;
+
+    @include respond(br3) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      grid-gap: 20px;
+    }
+
+    @include respond(br4) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      grid-gap: 20px;
+    }
+
+    @include respond(br5) {
+      display: grid;
+      grid-template-columns: 1fr;
+
+      grid-gap: 20px;
+    }
+  }
+
+  .container__books__loading {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-column: 3 / 4;
+    grid-gap: 0;
+
+    @include respond(br3) {
+      grid-column: 2 / 3;
+    }
+
+    @include respond(br5) {
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-column: 2 / 3;
+    }
+
+    app-loading-spinner {
+      grid-column: 2 / 3;
+    }
+  }
+
+  &__sidebar {
+    grid-row: 1/-1;
+    height: 100%;
+    display: grid;
+
+    &__filter {
+      display: grid;
+      grid-template-columns: 0.2fr 1fr;
+      justify-content: start;
+      color: $app-blue-light;
+
+      & .filters {
+        &__category {
+          &__title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border-bottom: 1px solid $app-blue-light;
+          }
+
+          &--collapsedBtn {
+            float: right;
+            cursor: pointer;
+          }
+
+          &--body {
+            max-height: 250px;
+            overflow: auto;
+
+            &::-webkit-scrollbar {
+              width: 10px;
+            }
+
+            &::-webkit-scrollbar-track {
+              box-shadow: inset 0 0 5px grey;
+              border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+              background: $app-blue-light;
+              border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+              background: $app-blue-light;
+            }
+          }
+          &--combo {
+            display: grid;
+            align-content: center;
+            justify-content: start;
+            grid-auto-flow: column;
+            padding: 2px;
+
+            .category-checkbox {
+              width: 14px;
+              height: 14px;
+              align-self: center;
+              margin: 4px 5px;
+
+              &::after {
+                left: -1px;
+                top: -4px;
+              }
+            }
+          }
+        }
+
+        &__price {
+          margin-top: 10px;
+          margin-bottom: 30px;
+
+          &__title {
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 1px solid $app-blue-light;
+          }
+
+          &--collapsedBtn {
+            float: right;
+            cursor: pointer;
+          }
+
+          &--combo {
+            text-align: center;
+            position: relative;
+            width: 100%;
+            &--rangeValues {
+              display: block;
+            }
+          }
+
+          &--range {
+            -webkit-appearance: none;
+            border: 1px solid $app-white;
+            width: 100%;
+            position: absolute;
+            left: 0;
+
+            &::-webkit-slider-runnable-track {
+              width: 100%;
+              height: 5px;
+              background: $app-gray-light-background;
+              border: none;
+              border-radius: 3px;
+            }
+
+            &::-webkit-slider-thumb {
+              -webkit-appearance: none;
+              border: none;
+              height: 16px;
+              width: 16px;
+              border-radius: 50%;
+              background: $app-blue-light;
+              margin-top: -4px;
+              cursor: pointer;
+              position: relative;
+              z-index: 1;
+            }
+
+            &:focus {
+              outline: none;
+            }
+
+            &:focus::-webkit-slider-runnable-track {
+              background: #ccc;
+            }
+
+            &::-moz-range-track {
+              width: 100%;
+              height: 5px;
+              background: #ddd;
+              border: none;
+              border-radius: 3px;
+            }
+
+            &::-moz-range-thumb {
+              border: none;
+              height: 16px;
+              width: 16px;
+              border-radius: 50%;
+              background: $app-blue-light;
+            }
+
+            &:-moz-focusring {
+              outline: 1px solid $app-white;
+              outline-offset: -1px;
+            }
+
+            &::-ms-track {
+              width: 100%;
+              height: 5px;
+              background: transparent;
+              border-color: transparent;
+              border-width: 6px 0;
+              color: transparent;
+              z-index: -4;
+            }
+          }
+        }
+
+        &__sort {
+          padding: 10px 0px;
+
+          &__title {
+            font-weight: bold;
+          }
+        }
+
+        &__author {
+          &__title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border-bottom: 1px solid $app-blue-light;
+          }
+
+          &--body {
+            max-height: 250px;
+            overflow: auto;
+
+            &::-webkit-scrollbar {
+              width: 10px;
+            }
+
+            &::-webkit-scrollbar-track {
+              box-shadow: inset 0 0 5px grey;
+              border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+              background: $app-blue-light;
+              border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+              background: $app-blue-light;
+            }
+          }
+          &--combo {
+            display: grid;
+            align-content: center;
+            justify-content: start;
+            grid-auto-flow: column;
+            padding: 2px;
+
+            .author-checkbox {
+              width: 14px;
+              height: 14px;
+              align-self: center;
+              margin: 4px 5px;
+
+              &::after {
+                left: -1px;
+                top: -4px;
+              }
+            }
+          }
+        }
+      }
+      @include respond(br4) {
+        grid-template-columns: 1fr;
+        justify-content: start;
+        color: $app-blue-light;
+        align-content: start;
+        margin-left: 8px;
+      }
+
+      @include respond(br5) {
+        grid-template-columns: 0.2fr 1fr 0.3fr;
+      }
+    }
+
+    @include respond(br5) {
+      grid-template-rows: 1fr;
+    }
+  }
+
+  @include respond(br5) {
+    grid-template-rows: 0.1fr 1fr;
+    grid-template-columns: none;
+    justify-content: center;
+  }
+}
+
+.title {
+  text-align: center;
+  margin-top: 10px;
+}
+.btn--close {
+  margin-top: -87px;
+  margin-left: 120px;
+  padding: 6px 12px;
+}
+.btn--exit {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.btn--exit:hover,
+.btn--exit:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.spinner-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background: rgba(161, 161, 196, 0.47);
+  z-index: 998;
+}

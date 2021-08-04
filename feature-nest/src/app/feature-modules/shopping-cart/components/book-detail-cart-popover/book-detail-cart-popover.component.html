@@ -1,0 +1,19 @@
+<div class="products__container">
+  <div class="products__img">
+    <img height="112px" width="75px" [src]="book.imageUrl" alt="" />
+  </div>
+  <a class="products__url" routerLink="{{ book.productId }}">
+    <div class="products__detail">
+      <div class="products__detail__author">{{ book.author }}</div>
+      <div class="products__detail__title">{{ book.title }}</div>
+      <div class="products__detail__quantity">
+        Quantity: {{ book.quantity }}
+      </div>
+      <div class="products__detail__price">Price: {{ book.price }} Ron</div>
+    </div>
+  </a>
+  <div (click)="emitBook()" class="delete">
+    <!-- <img src="../../../../../assets/images/delete-forever.png" /> -->
+    <b> X </b>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+<div *ngIf="!book.isInWishList" class="fa fa-heart-o container__book__heart" title="Add to wishlist" (click)="addBookToWishList($event)"></div>
+<div *ngIf="book.isInWishList" class="fa fa-heart container__book__heart" title="Remove from wishlist" (click)="deleteBookToWishList($event)"></div>

@@ -1,0 +1,61 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == br1 {
+    @media only screen and (max-width: 93.75em) {
+      //1500px
+      @content;
+    }
+  }
+  @if $breakpoint == br2 {
+    @media only screen and (max-width: 82.8125em) {
+      //1325px
+      @content;
+    }
+  }
+  @if $breakpoint == br3 {
+    @media only screen and (max-width: 75em) {
+      //1200px
+      @content;
+    }
+  }
+  @if $breakpoint == br4 {
+    @media only screen and (max-width: 56.25em) {
+      //900px
+      @content;
+    }
+  }
+  @if $breakpoint == br5 {
+    @media only screen and (max-width: 37.5em) {
+      //600px
+      @content;
+    }
+  }
+}
+
+@mixin scrollbars($size) {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+  }
+  // -ms-overflow-style: 0px; /* IE and Edge */
+  // scrollbar-width: none; /* Firefox */
+}
+
+$app-blue-dark: #081e26;
+$app-blue-light: #009999;
+$app-blue-light-hover: #48bbec;
+$invalid-message-error: #ff0000;
+$app-gray-light-background: #ddd;
+$app-white: white;
+$invalid-input-color: #e67f86;
+$add-to-cart-color: #099b00;
+$nav-index-value: 5555;
+$app-yellow-star:rgb(250, 192, 32);
+$app-gray-star:#444;
+$app-5-star-icon:"\2605\2605\2605\2605\2605";
+$btn-add-wishlist-background: #eb780a;
+$scollbar-track-background: #f1f1f1;
+$scollbar-thumb-background: #888;
+$shoppingcart-summary-background: rgb(235, 235, 235);
+$scollbar-thumb-background-hover: #555;
+$app-light-gray: #d3d3d3;

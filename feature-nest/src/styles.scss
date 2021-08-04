@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+body{
+    position: relative;
+}
+
+body::after {
+    content: '';
+    display: block;
+    height: 150px;
+  }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+
+

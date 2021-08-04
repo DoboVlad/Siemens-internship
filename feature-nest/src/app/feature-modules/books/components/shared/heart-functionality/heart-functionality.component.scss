@@ -1,0 +1,23 @@
+@import "/src/mixins.scss";
+
+.container__book__heart {
+    color: $app-blue-light;
+    position: absolute;
+    top:0;
+    right: 20px;
+    cursor: pointer;
+}
+     
+.fa-heart {
+  color:$app-blue-light;
+}
+
+@media screen and (max-width: 389px) {
+  .container__book__heart{
+    color: $app-blue-light;
+    position: absolute;
+    top:0;
+    right: 50px;
+    cursor: pointer;
+  }
+}

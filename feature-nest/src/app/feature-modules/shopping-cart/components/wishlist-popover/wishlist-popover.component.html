@@ -1,0 +1,24 @@
+
+<div class="products__link" (click)="changeBookRoute(book.productId)">
+<div class="products__container">
+  
+    <div class="products__img">
+      <img height="112px" width="75px" [src]="book.imageUrl" alt="" />
+    </div>
+    
+    <div class="products__detail">
+      <div class="products__detail__author">{{ book.author }}</div>
+      <div class="products__detail__title">{{ book.title }}</div>
+      <div class="products__detail__price">Price: {{ book.price }} Ron</div>
+      <div class="products__detail__addCart">
+        <button class="btn btn-primary btn__add-to-cart" (click)="addBookToCart($event);" >Add to cart</button>
+      </div>
+      </div>
+   
+     <div (click)="emitBookToDelete()" class="products__detail__delete">
+      <b>
+        X
+      </b>
+    </div>
+</div>
+</div>

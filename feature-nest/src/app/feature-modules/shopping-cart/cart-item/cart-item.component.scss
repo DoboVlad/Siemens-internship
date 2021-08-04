@@ -1,0 +1,97 @@
+@import "/src/mixins.scss";
+
+.card {
+  display: grid;
+  grid-auto-flow: column;
+  width: 80%;
+
+  &__image {
+    img {
+      width: 250px;
+      height: 340px;
+    }
+  }
+
+  &__details {
+    display: grid;
+    grid-auto-flow: row;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    // width: 100%;
+
+    &__delete {
+      display: grid;
+      grid-auto-flow: column;
+      align-content: center;
+
+      &--ptag {
+        margin: auto 0;
+      }
+    }
+
+    p {
+      display: grid;
+      width: 100%;
+    }
+
+    &__content--hide {
+      overflow: hidden;
+      line-height: 1.8em;
+      grid-row: 2/3;
+      word-wrap: break-word;
+    }
+
+    &__content--show {
+      height: auto;
+      line-height: 1.8em;
+      height: 50px;
+      grid-row: 2/3;
+      overflow: hidden;
+      word-wrap: break-word;
+    }
+
+    &__fade::after {
+      content: '';
+      display: block;
+      position: absolute;
+      justify-self: end;
+      grid-column: 1/3;
+      width: 100%;
+      margin-top: 20px;
+      height: 40px;
+      background: white;
+      background: linear-gradient(0deg, white 0%, rgba(255, 255, 255, 0) 100%);
+    }
+  }
+}
+
+.newton-close {
+  display: grid;
+  justify-self: end;
+  margin: auto 0;
+  font-size: xx-large;
+  color: $app-blue-dark;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+
+  .card {
+    width: auto;
+    margin-right: 110px;
+
+    &__image img {
+      height: 165px;
+      width: 110px;
+    }
+
+    &__details__fade::after {
+      margin-top: 25px;
+    }
+  }
+
+  .newton-close {
+    font-size: x-large;
+  }
+}

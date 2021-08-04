@@ -1,0 +1,17 @@
+<div class="spinner-wrapper" *ngIf="isLoadingData$ | async">
+  <app-book-loader></app-book-loader>
+</div>
+
+<h1 class="title">My Cart</h1>
+
+<div class="cart">
+  <div class="cart__book" *ngFor="let book of transformFromObjectToArray(cartBooks.books)">
+    <app-cart-item [book]="book" (deleteBook)="deleteBook($event)"></app-cart-item>
+  </div>
+  <div class="cart__summary">
+    <p><strong>Subtotal: </strong>{{cartBooks.subtotalPriceProducts | currency: 'RON '}}</p>
+    <p class="cart__summary--ptag"><strong>Delivery: </strong></p>
+    <p><strong>Total: {{cartBooks.subtotalPriceProducts | currency: 'RON '}}</strong></p>
+    <button class="btn btn-info cart__summary--checkout" routerLink="/shoppingcart/order">Continue to checkout</button>
+  </div>
+</div>

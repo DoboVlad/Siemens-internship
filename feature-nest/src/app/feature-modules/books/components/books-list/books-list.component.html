@@ -1,0 +1,211 @@
+<!-- <a routerLink="/auth/registration"
+  ><button class="btn btn-primary">Registration</button></a
+>
+<a routerLink="/auth/login"
+  ><button class="btn btn-primary">Login</button></a
+> -->
+<div class="spinner-wrapper" *ngIf="isLoadingData$ | async">
+  <app-book-loader></app-book-loader>
+</div>
+
+<div class="buttons">
+  <ng-template [ngIf]="authSource | async">
+    <button
+      class="add-button"
+      (click)="onClickActivateAddForm()"
+      *ngIf="isMobile$ | async; else desktopView"
+      type="button"
+    >
+      Add book
+    </button>
+  </ng-template>
+  <ng-template #desktopView>
+    <button
+      class="add-button"
+      (click)="openForm(template)"
+      *ngIf="authSource | async"
+    >
+      Add book
+    </button>
+  </ng-template>
+  <div *ngIf="isMobile">
+    <button class="add-button" (click)="onToggleFilterBooks()">
+      Filter books
+    </button>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title">Add new book</h4>
+    <span class="close btn--exit" (click)="closeForm()"></span>
+  </div>
+  <div class="modal-body">
+    <app-book-add (bookFormValues)="addBook($event)"></app-book-add>
+    <button
+      type="button"
+      class="btn btn-danger btn--close"
+      (click)="closeForm()"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="isAddMobile">
+  <div class="container">
+    <h4>Add new book</h4>
+  </div>
+  <app-book-add
+    *ngIf="isAddMobile"
+    (bookFormValues)="addBook($event)"
+  ></app-book-add>
+  <button
+    type="button"
+    class="btn btn-danger btn--close"
+    (click)="isAddMobile = false"
+  >
+    Back
+  </button>
+</ng-template>
+<div class="container" *ngIf="!isAddMobile">
+  <div class="container__sidebar" [hidden]="isMobile && showFilterBooks">
+    <div class="container__sidebar__filter">
+      <div></div>
+
+      <div class="filters">
+        <div class="filters__category">
+          <div class="filters__category__title" (click)="onToggleCategories()">
+            Category
+            <div class="filters__category--collapsedBtn">
+              <span *ngIf="collapsedCategories; else minus">+</span>
+              <ng-template #minus>
+                <span>-</span>
+              </ng-template>
+            </div>
+          </div>
+          <div
+            class="categories filters__category--body"
+            [@collapse]="collapsedCategories"
+          >
+            <ng-container *ngIf="categories$ | async as cat">
+              <ng-container *ngFor="let category of cat">
+                <div class="filters__category--combo">
+                  <input
+                    class="category-checkbox form-control"
+                    type="checkbox"
+                    name="category"
+                    [value]="category.categoryName"
+                    (change)="onPropertyCheckboxChange($event, 'category')"
+                  />
+                  <p>{{ category.categoryName }}</p>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+        <div class="filters__price">
+          <div class="filters__price__title" (click)="onTogglePrice()">
+            Price
+
+            <div class="filters__price--collapsedBtn">
+              <span *ngIf="collapsedPrice; else minus">+</span>
+              <ng-template #minus>
+                <span>-</span>
+              </ng-template>
+            </div>
+          </div>
+
+          <div class="filters__price--combo" [@collapse]="collapsedPrice">
+            <p>{{ booksPriceRangeMin }} lei - {{ booksPriceRangeMax }} lei</p>
+            <span class="filters__price--combo--rangeValues"></span>
+            <input
+              class="filters__price--range"
+              type="range"
+              value="{{ booksPriceRangeMin }}"
+              min="0"
+              max="800"
+              (change)="onPriceMinSelected($event)"
+            />
+            <input
+              class="filters__price--range"
+              type="range"
+              value="{{ booksPriceRangeMax }}"
+              min="0"
+              max="800"
+              (change)="onPriceMaxSelected($event)"
+            />
+          </div>
+        </div>
+
+        <div class="filters__author">
+          <div class="filters__author__title" (click)="onToggleAuthor()">
+            Author
+            <div class="filters__price--collapsedBtn">
+              <span *ngIf="collapsedPrice; else minus">+</span>
+              <ng-template #minus>
+                <span>-</span>
+              </ng-template>
+            </div>
+          </div>
+          <div class="filters__author--body" [@collapse]="collapsedAuthor">
+            <ng-container *ngFor="let author of booksAuthors">
+              <div class="filters__author--combo">
+                <input
+                  class="author-checkbox form-control"
+                  type="checkbox"
+                  name="author"
+                  [value]="author"
+                  (change)="onPropertyCheckboxChange($event, 'author')"
+                />
+                <div class="filters__author--name">
+                  <p>{{ author }}</p>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="filters__sort">
+          <label for="priceSelector" class="filters__sort__title"
+            >Sort By:</label
+          >
+          <select
+            class="form-control"
+            id="priceSelector"
+            placeholder="Featured"
+            #order
+            (change)="onOrderSelected($event)"
+          >
+            <option value="" selected>Featured</option>
+            <option value="asc">Low to High</option>
+            <option value="desc">High to Low</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container__books">
+    <!-- <div class="container__books__loading" *ngIf="(loadingSpinnerService.loadingSpinner$ | async)"> 
+            <app-loading-spinner></app-loading-spinner>
+        </div> -->
+    <app-book
+      *ngFor="
+        let book of booksArray
+          | search: searchedText
+          | filter
+            : categoriesSelectedArray
+            : booksAuthorSelected
+            : booksPriceRangeMin
+            : booksPriceRangeMax
+          | orderBy: order.value:'price'
+      "
+      [book]="book"
+    ></app-book>
+  </div>
+</div>
+
+<app-scroll-to-top
+  *ngIf="isMobile$ | async"
+  appScrollToTopDir
+></app-scroll-to-top>

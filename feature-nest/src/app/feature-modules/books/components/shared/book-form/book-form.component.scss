@@ -1,0 +1,34 @@
+$error-input-color: #e3c3c5;
+$input-placeholder-color: #999;
+
+@mixin input-placeholder-color($color) {
+  -webkit-input-placeholder-color: $color;
+  -moz-placeholder-color: $color;
+  -ms-input-placeholde: $color;
+}
+
+.invalid-input {
+  float: right;
+  color: #e67f86;
+  padding-left: 10px;
+}
+
+.container {
+  padding: 10px;
+}
+
+.form-group > .form-control,
+.form-group .input-group > .form-control {
+  padding: 0px 10px 0px 10px;
+}
+
+.error {
+  @include input-placeholder-color($input-placeholder-color);
+  input {
+    background-color: $error-input-color;
+  }
+}
+
+typeahead-container > ul.dropdown-menu {
+  max-height: 240px;
+}

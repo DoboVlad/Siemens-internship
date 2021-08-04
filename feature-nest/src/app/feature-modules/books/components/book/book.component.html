@@ -1,0 +1,17 @@
+<a routerLink="/books/{{ book.id }}">
+  <div class="container__book">
+    <app-heart-functionality
+      [book]="book"
+      [nrBooksFromWishList]="nrBooksFromWishList"
+    ></app-heart-functionality>
+    <div class="container__book--image">
+      <img [src]="!!book.imageUrl ? book.imageUrl : noImage" height="100px" />
+    </div>
+    <h5 class="container__book--author">{{ book.author }}</h5>
+    <p class="container__book--description">{{ book.title }}</p>
+    <div class="container__book--rating">
+      <app-rating-display [bookId]="book.id"></app-rating-display>
+    </div>
+    <p class="container__book--price">{{ book.price }} lei</p>
+  </div>
+</a>

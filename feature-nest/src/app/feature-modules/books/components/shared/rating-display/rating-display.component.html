@@ -1,0 +1,7 @@
+<div class="rating">
+    <div class="rating__stars" >
+        <div class="rating__empty-stars"></div>
+        <div class="rating__full-stars" [style.width.%]="avgRate | async"></div>
+    </div>
+    <div class="rating__number">({{nrOfRatings}})</div>
+</div>
